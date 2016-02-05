@@ -56,6 +56,7 @@ public class ChiliConstants {
 	
 	//Kapellmeister.java---------------------------//
 	public static final byte kSubSystems = 0;
+	public static final byte iDummyDrive = 0;
 
 	
 	

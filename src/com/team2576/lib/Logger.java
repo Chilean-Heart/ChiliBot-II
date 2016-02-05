@@ -30,6 +30,7 @@ public class Logger {
 	private DriverStation driver;
 	@SuppressWarnings("unused")
 	private RobotOutput output;
+	@SuppressWarnings("unused")
 	private SensorInput sensor;
 	
 	private static Logger instance;
@@ -80,10 +81,11 @@ public class Logger {
 		try {
 			//TODO get all buttons values in a array within DriverInput and print to writer with Arrays.toString(array);
 			this.writer.write(String.format("%s", this.generateTimeStamp(this.logger_time) ));
-			this.writer.write(String.format(",%.2f", this.sensor.getBatteryVoltage() ));
+			//this.writer.write(String.format(",%.2f", this.sensor.getBatteryVoltage() ));
+			this.writer.write(String.format(", %.2f", 0.0));
 			this.writer.newLine();
 			successful = true;
-		} catch (IOException err) {
+		} catch (IOException | NullPointerException err) {
 			successful = false;
 			err.printStackTrace();
 		}

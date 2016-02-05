@@ -3,6 +3,9 @@ package com.team2576.robot;
 
 import com.team2576.lib.Kapellmeister;
 import com.team2576.lib.Logger;
+import com.team2576.lib.util.ChiliConstants;
+import com.team2576.robot.subsystems.DummyDrive;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 
@@ -24,6 +27,12 @@ public class ChiliRobot extends IterativeRobot {
 	 */
 	Logger loggy;
 	
+	/*
+	 * Declaration of subsystems.
+	 * 
+	 * Declaracion de subsistemas.
+	 */
+	DummyDrive drive;
 	
     /**
      * This function is run when the robot is first started up and should be
@@ -33,7 +42,10 @@ public class ChiliRobot extends IterativeRobot {
     	
     	kapellmeister = Kapellmeister.getInstance();
 		loggy = Logger.getInstance();
-
+		drive = DummyDrive.getInstance();
+		
+		kapellmeister.addTask(drive, ChiliConstants.iDummyDrive);
+		
     }
     
     /**
@@ -56,6 +68,9 @@ public class ChiliRobot extends IterativeRobot {
      *
      */
     public void teleopInit() {
+    	
+    	//Open log file
+    	loggy.openLog();
         
     }
 
