@@ -68,7 +68,6 @@ public class ChiliRobot extends IterativeRobot {
      *
      */
     public void teleopInit() {
-    	
     	//Open log file
     	loggy.openLog();
         
