@@ -1,0 +1,10 @@
+.scrolling_list {
+    height: 595px;
+    width: 300px;
+    overflow: hidden;
+}
+
+
+.scrolling_list:hover {
+    overflow: auto;
+}

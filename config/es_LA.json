@@ -1,0 +1,29 @@
+{
+  "code": "es_LA",
+  "name": "Spanish (Latin America)",
+  "inherit": "none",
+  "translations": {
+    "Estado": "State",
+    "funtion": "function",
+    "Registro": "Log",
+    "si": "if",
+    "entonces": "then",
+    "hacer": "do",
+    "otro": "else",
+    "termino": "end",
+    "para": "for",
+    "par": "pair",
+    "hilo": "string",
+    "a": "to",
+    "izquierda": "left",
+    "derecha": "right",
+    "obtener": "get",
+    "fijar": "set",
+    "Motor": "Motor", 
+    "Proceso": "Thread",
+    "dormir": "sleep",
+    "necesita": "require",
+    "Comando": "Command",
+    "Digital": "Digital"
+  }
+}
