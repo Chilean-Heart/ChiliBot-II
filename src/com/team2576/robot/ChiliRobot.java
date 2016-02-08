@@ -1,4 +1,3 @@
-
 package com.team2576.robot;
 
 import com.team2576.lib.Kapellmeister;
@@ -37,7 +36,7 @@ public class ChiliRobot extends IterativeRobot {
 	 * 
 	 * Declaracion de subsistemas.
 	 */
-	DummyDrive drive;
+	DummyDrive drive; 
 	
     /**
      * This function is run when the robot is first started up and should be

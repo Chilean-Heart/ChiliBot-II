@@ -44,8 +44,9 @@ public class DummyDrive implements SubComponent {
 			timeStamp = Timer.getFPGATimestamp();
 		}
 		
+		//ADDED COMMENT LOL
 		SmartDashboard.putBoolean("Hall A", sensor.getHallA());
-		//SmartDashboard.putNumber("Mag Encoder", sensor.getEncoder());
+		SmartDashboard.putNumber("Mag Encoder", sensor.getEncoder());
 		SmartDashboard.putNumber("IMU Filtered", sensor.getAngleIMU());
 		SmartDashboard.putNumber("IMU Raw Angle", sensor.getRawAngleIMU());
 		SmartDashboard.putNumber("IMU Raw Z Acceleration", sensor.getRawZIMU());
