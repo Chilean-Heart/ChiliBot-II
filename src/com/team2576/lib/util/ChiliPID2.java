@@ -8,7 +8,7 @@ package com.team2576.lib.util;
 public class ChiliPID2 {
 	
 	private double kP, kI, kD;
-	private double eps;
+	//private double eps;
 	private double ref, prev_val;
 	private double error_integral;
 	
@@ -18,7 +18,7 @@ public class ChiliPID2 {
 		this.kP = p;
 		this.kI = i;
 		this.kD = d;
-		this.eps = e;
+		//this.eps = e;
 		
 		this.ref = 0;
 		this.prev_val = 0;
@@ -37,10 +37,10 @@ public class ChiliPID2 {
 
 	/**
 	 * @param eps the deadband value to set
-	 */
+	 *//*
 	public void setEpsilon(double eps) {
 		this.eps = eps;
-	}
+	}*/
 	
 	public double calcPID(double currentVal) {
 		
@@ -50,7 +50,7 @@ public class ChiliPID2 {
 		}
 		
 		double error = this.ref - currentVal;
-		double delta = currentVal - this.prev_val;
+		//double delta = currentVal - this.prev_val;
 		double output = 0;
 		
 		this.error_integral += error;
