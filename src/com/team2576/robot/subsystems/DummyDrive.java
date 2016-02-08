@@ -7,6 +7,7 @@ import com.team2576.robot.io.DriverInput;
 import com.team2576.robot.io.SensorInput;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DummyDrive implements SubComponent {
 
@@ -42,6 +43,12 @@ public class DummyDrive implements SubComponent {
 			
 			timeStamp = Timer.getFPGATimestamp();
 		}
+		
+		SmartDashboard.putBoolean("Hall A", sensor.getHallA());
+		//SmartDashboard.putNumber("Mag Encoder", sensor.getEncoder());
+		SmartDashboard.putNumber("IMU Filtered", sensor.getAngleIMU());
+		SmartDashboard.putNumber("IMU Raw Angle", sensor.getRawAngleIMU());
+		SmartDashboard.putNumber("IMU Raw Z Acceleration", sensor.getRawZIMU());
 			
 		return false;
 	}
@@ -51,6 +58,7 @@ public class DummyDrive implements SubComponent {
 		// TODO Auto-generated method stub
 		
 		double [] vals = this.tankDrive(0, 0);
+		debug.println("Began disabled");
 		debug.println(Arrays.toString(vals));
 
 	}

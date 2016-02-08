@@ -19,7 +19,7 @@ public class Kapellmeister {
 	private static Kapellmeister Konzertmeister;	
 	
 	private DriverInput driverData;
-	public SensorInput sensorData;
+	private SensorInput sensorData;
 	private Debugger debug;
 	
 	private Kapellmeister() {		

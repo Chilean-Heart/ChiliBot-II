@@ -11,6 +11,12 @@ package com.team2576.lib;
  *
  */
 
-public class ChiliVisionServer {
+public class ChiliVisionServer implements ChiliServers{
+
+	@Override
+	public boolean load() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

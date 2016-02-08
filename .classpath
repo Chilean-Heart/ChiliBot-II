@@ -5,6 +5,6 @@
 	<classpathentry kind="var" path="networktables" sourcepath="networktables.sources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="lib" path="lib/json-simple-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/nanohttpd-webserver-2.1.1-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="lib/nanohttpd-webserver-2.1.1-jar-with-dependencies.jar" sourcepath="C:/Users/lucas/Documents/maven_test/nanohttpd/core/src/main/java/fi"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

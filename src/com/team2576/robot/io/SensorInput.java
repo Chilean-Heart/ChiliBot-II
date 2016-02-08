@@ -1,8 +1,13 @@
 package com.team2576.robot.io;
 
-import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import com.team2576.lib.sensors.ChiliIMU;
+
+import edu.wpi.first.wpilibj.ADXL362;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.interfaces.Accelerometer;
+import edu.wpi.first.wpilibj.interfaces.Accelerometer.Range;
 
 /**
  * The Class SensorInput. Similar to DriverInput, but instead in charge of overlooking all sensors on the robot.
@@ -24,16 +29,18 @@ public class SensorInput {
 	 * Instancia unica del objeto.
 	 */
 	private static SensorInput instance;
+
 	
-	/**  
-	 * Internal Accelerometer
-	 */
-	private final BuiltInAccelerometer accel;
 	
-	/**
-	 * Power Distribution Panel
-	 */
 	private final PowerDistributionPanel pdp;
+	
+	private final DigitalInput hallA;
+	
+	private final Encoder encoderA;
+	
+	private final ADXRS450_Gyro adGyro;
+	private final ADXL362 adAccel;
+	private final ChiliIMU imu;
 	
 	/**
 	 * Generates a single, static instance of the SensorInput class to allow universal and unique access to all sensors
@@ -48,8 +55,12 @@ public class SensorInput {
 	}
 	
 	private SensorInput() {
-		accel = new BuiltInAccelerometer(Accelerometer.Range.k2G);
 		pdp = new PowerDistributionPanel();
+		hallA = new DigitalInput(0);
+		encoderA = new Encoder(2, 3, false);
+		adAccel = new ADXL362(Range.k4G);
+		adGyro = new ADXRS450_Gyro();
+		imu = new ChiliIMU(adAccel, adGyro);
 	}
 	
 	/**
@@ -61,31 +72,25 @@ public class SensorInput {
 		return this.pdp.getVoltage();
 	}	
 	
-	/**
-	 * Gets the internal accelerometer's X axis.
-	 *
-	 * @return x axis value
-	 */
-	public double getAccelX() {
-		return this.accel.getX();
+	
+	public boolean getHallA() {
+		return this.hallA.get();
 	}
 	
-	/**
-	 * Gets the internal accelerometer's Y axis.
-	 *
-	 * @return y axis value
-	 */
-	public double getAccelY() {
-		return this.accel.getY();
+	public double getEncoder() {
+		return this.encoderA.get();
 	}
 	
-	/**
-	 * Gets the internal accelerometer's Z axis.
-	 *
-	 * @return z axis value
-	 */
-	public double getAccelZ() {
-		return this.accel.getZ();
+	public double getAngleIMU() {
+		return this.imu.getAngle();
+	}
+	
+	public double getRawAngleIMU() {
+		return this.imu.getRawAngle();
+	}
+	
+	public double getRawZIMU() {
+		return this.imu.getRawZ();
 	}
 
 }

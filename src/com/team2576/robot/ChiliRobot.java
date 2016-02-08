@@ -6,6 +6,11 @@ import com.team2576.lib.Logger;
 import com.team2576.lib.util.ChiliConstants;
 import com.team2576.robot.subsystems.DummyDrive;
 
+import java.io.IOException;
+
+import com.team2576.lib.ChiliHTTPServer;
+import com.team2576.lib.ChiliServerManager;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 
@@ -16,9 +21,8 @@ public class ChiliRobot extends IterativeRobot {
 	 * 
 	 * Declaracion de objectos administradores. 
 	 */
-	
 	Kapellmeister kapellmeister;
-	
+	ChiliServerManager serverManager;
 	
 	/*
 	 * Declaration of lib objects.
@@ -26,6 +30,7 @@ public class ChiliRobot extends IterativeRobot {
 	 * Declaracion de objectos lib. 
 	 */
 	Logger loggy;
+	ChiliHTTPServer httpServer;
 	
 	/*
 	 * Declaration of subsystems.
@@ -43,8 +48,18 @@ public class ChiliRobot extends IterativeRobot {
     	kapellmeister = Kapellmeister.getInstance();
 		loggy = Logger.getInstance();
 		drive = DummyDrive.getInstance();
+		serverManager = ChiliServerManager.getInstance();
+		
+		try {
+			httpServer = new ChiliHTTPServer();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		kapellmeister.addTask(drive, ChiliConstants.iDummyDrive);
+		serverManager.addServer(httpServer);
+		serverManager.initializeServers();
+		
 		
     }
     
@@ -69,7 +84,7 @@ public class ChiliRobot extends IterativeRobot {
      */
     public void teleopInit() {
     	//Open log file
-    	loggy.openLog();
+    	loggy.openLog();    	
         
     }
 

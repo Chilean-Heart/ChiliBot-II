@@ -1,5 +1,5 @@
 package com.team2576.lib.util;
-
+/*
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,10 +8,10 @@ import java.nio.file.Paths;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
+import org.json.simple.JSONValue;*/
 
 public class ChiliParser {
-	
+	/*
 	public static void main(String[] args) {
 		JSONObject json = new JSONObject();
 		json.put("name", "foo");
@@ -39,5 +39,5 @@ public class ChiliParser {
 			e.printStackTrace();
 		}
 	}
-
+*/
 }

@@ -55,6 +55,10 @@ public class Debugger {
 		this.debug_on = false;
 	}
 	
+	public void print(Object message) {
+		this.debugPrintnoln(message.toString());
+	}
+	
 	public void println(String message) {
 		this.debugPrint(message);
 	}
@@ -84,6 +88,12 @@ public class Debugger {
 	private void debugPrint(Vector<Object> message) {
 		if(debug_on) {
 			System.out.println(this.printFlag + message.toString());
+		}
+	}
+	
+	private void debugPrintnoln(String message) {
+		if (debug_on) {
+			System.out.println(this.printFlag + message);
 		}
 	}
 
