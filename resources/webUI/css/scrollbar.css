@@ -8,3 +8,12 @@
 .scrolling_list:hover {
     overflow: auto;
 }
+
+.img3 {
+  max-width: 90%;
+  height: auto;
+}
+
+.img-center {margin:0 auto;}
+
+.img-responsive {margin:0 auto;}

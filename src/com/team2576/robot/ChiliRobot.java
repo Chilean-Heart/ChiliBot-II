@@ -11,6 +11,7 @@ import com.team2576.lib.ChiliHTTPServer;
 import com.team2576.lib.ChiliServerManager;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 
 
 public class ChiliRobot extends IterativeRobot {
@@ -43,6 +44,8 @@ public class ChiliRobot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	
+    	Timer.delay(1);
     	
     	kapellmeister = Kapellmeister.getInstance();
 		loggy = Logger.getInstance();

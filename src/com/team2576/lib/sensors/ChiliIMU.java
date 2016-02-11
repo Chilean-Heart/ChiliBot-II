@@ -71,7 +71,7 @@ public class ChiliIMU {
 			theta_k_1 = this.theta;
 		}
         
-        double theta_k = this.alpha * (theta_k_1 + this.gyro.getAngle() * dt)+ this.beta * this.accel.getZ() ;
+        double theta_k = this.alpha * (theta_k_1 + this.gyro.getRate() * dt)+ this.beta * this.accel.getZ() ;
         
         synchronized (this) {
 			this.theta = theta_k;

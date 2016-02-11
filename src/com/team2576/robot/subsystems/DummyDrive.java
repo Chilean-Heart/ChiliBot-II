@@ -40,16 +40,16 @@ public class DummyDrive implements SubComponent {
 		
 			double [] vals = this.tankDrive(driver.getXboxLeftY(), driver.getXboxRightY());
 			debug.println(Arrays.toString(vals));
-			
 			timeStamp = Timer.getFPGATimestamp();
 		}
 		
 		//ADDED COMMENT LOL
 		SmartDashboard.putBoolean("Hall A", sensor.getHallA());
 		SmartDashboard.putNumber("Mag Encoder", sensor.getEncoder());
-		SmartDashboard.putNumber("IMU Filtered", sensor.getAngleIMU());
-		SmartDashboard.putNumber("IMU Raw Angle", sensor.getRawAngleIMU());
-		SmartDashboard.putNumber("IMU Raw Z Acceleration", sensor.getRawZIMU());
+		//SmartDashboard.putNumber("IMU Filtered", sensor.getAngleIMU());
+		//SmartDashboard.putNumber("IMU Raw Angle", sensor.getRawAngleIMU());
+		//SmartDashboard.putNumber("IMU Raw Z Acceleration", sensor.getRawZIMU());
+		SmartDashboard.putNumber("Maxbotix Sensor", sensor.getSensorVoltage());
 			
 		return false;
 	}
