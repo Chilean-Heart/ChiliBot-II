@@ -1,12 +1,16 @@
 package com.team2576.robot.io;
 
+import com.team2576.lib.sensors.ADIS16448_IMU;
 import com.team2576.lib.sensors.ChiliIMU;
+import com.team2576.lib.sensors.MaxBotix;
 
 import edu.wpi.first.wpilibj.ADXL362;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer.Range;
 
 /**
@@ -38,9 +42,12 @@ public class SensorInput {
 	
 	private final Encoder encoderA;
 	
+	private final MaxBotix ultraSonic;
+	
 	private final ADXRS450_Gyro adGyro;
 	private final ADXL362 adAccel;
-	private final ChiliIMU imu;
+	private final ADIS16448_IMU adIMU;
+
 	
 	/**
 	 * Generates a single, static instance of the SensorInput class to allow universal and unique access to all sensors
@@ -60,7 +67,8 @@ public class SensorInput {
 		encoderA = new Encoder(2, 3, false);
 		adAccel = new ADXL362(Range.k4G);
 		adGyro = new ADXRS450_Gyro();
-		imu = new ChiliIMU(adAccel, adGyro);
+		adIMU = new ADIS16448_IMU();
+		ultraSonic = new MaxBotix(0);
 	}
 	
 	/**
@@ -81,16 +89,16 @@ public class SensorInput {
 		return this.encoderA.get();
 	}
 	
-	public double getAngleIMU() {
-		return this.imu.getAngle();
+	public double getCm() {
+		return this.ultraSonic.getCentimeters();
 	}
 	
-	public double getRawAngleIMU() {
-		return this.imu.getRawAngle();
+	public double getIn() {
+		return this.ultraSonic.getInches();
 	}
 	
-	public double getRawZIMU() {
-		return this.imu.getRawZ();
+	public double getSensorVoltage() {
+		return this.ultraSonic.getSensorVoltage();
 	}
-
+	
 }

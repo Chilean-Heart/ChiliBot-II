@@ -74,6 +74,12 @@ public class ChiliConstants {
 	//Servers--------------------------------------//
 	public static final int webUIPort = 5800;
 	public static final byte kServers = 2;
+
+	public static final double kMaxBotixSuppliedVoltage = 5.0;
+	public static final double kInchToCm = 2.54;
+	public static final double kVoltsPerInch = kMaxBotixSuppliedVoltage / 512;
+	public static final double kVoltsPerCm = kVoltsPerInch * kInchToCm;
+	
 	
 
 	
