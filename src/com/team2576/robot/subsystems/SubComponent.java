@@ -10,7 +10,19 @@ import com.team2576.robot.io.SensorInput;
  * La Interfaz SubComponent. Incluye 2 funciones basica para ser implementadas por todos los subsistemas.
  * Todas las demas clases contenidas al interior de com.team2576.robot.subsystems deben implementar
  * esta interfaz.
- *
+ * 
+ * Must add following code to <SubSystem> class: 
+ * 
+ * <p>
+ * private static SubSystem instance; <p>
+ * <p>
+ * public static SubSystem getInstance() {<p>
+ * 		if (instance == null) {<p>
+ * 			instance = new SubSystem();<p>
+ * 		}<p>
+ * 		return instance;<p>
+ * }<p>
+ * 
  * @author Lucas
  */
 
