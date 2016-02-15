@@ -33,6 +33,8 @@ public class SensorInput {
 	 * Instancia unica del objeto.
 	 */
 	private static SensorInput instance;
+	
+	//This is a comment
 
 	
 	
