@@ -49,6 +49,8 @@ public class SensorInput {
 	private final ADXRS450_Gyro adGyro;
 	private final ADXL362 adAccel;
 	private final ADIS16448_IMU adIMU;
+	
+	private final DigitalInput limitSwitch;
 
 	
 	/**
@@ -71,6 +73,7 @@ public class SensorInput {
 		adGyro = new ADXRS450_Gyro();
 		adIMU = new ADIS16448_IMU();
 		ultraSonic = new MaxBotix(0);
+		limitSwitch = new DigitalInput(5);
 	}
 	
 	/**
@@ -101,6 +104,10 @@ public class SensorInput {
 	
 	public double getSensorVoltage() {
 		return this.ultraSonic.getSensorVoltage();
+	}
+	
+	public boolean getLimitSwitch() {
+		return this.limitSwitch.get();
 	}
 	
 }

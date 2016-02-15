@@ -2,7 +2,9 @@ package com.team2576.robot;
 
 import com.team2576.lib.Kapellmeister;
 import com.team2576.lib.Logger;
+import com.team2576.lib.sensors.ChiliIMU;
 import com.team2576.lib.util.ChiliConstants;
+import com.team2576.robot.subsystems.ChiliIntake;
 import com.team2576.robot.subsystems.DummyDrive;
 
 import java.io.IOException;
@@ -39,6 +41,8 @@ public class ChiliRobot extends IterativeRobot {
 	 */
 	DummyDrive drive; 
 	
+	ChiliIntake intake;
+	
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -51,6 +55,7 @@ public class ChiliRobot extends IterativeRobot {
 		loggy = Logger.getInstance();
 		drive = DummyDrive.getInstance();
 		serverManager = ChiliServerManager.getInstance();
+		intake = ChiliIntake.getInstance();
 		
 		try {
 			httpServer = new ChiliHTTPServer();

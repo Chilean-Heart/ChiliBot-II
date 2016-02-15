@@ -13,15 +13,15 @@ import com.team2576.robot.io.SensorInput;
  * 
  * Must add following code to <SubSystem> class: 
  * 
- * <p>
- * private static SubSystem instance; <p>
- * <p>
- * public static SubSystem getInstance() {<p>
- * 		if (instance == null) {<p>
- * 			instance = new SubSystem();<p>
- * 		}<p>
- * 		return instance;<p>
- * }<p>
+ * 
+ * private static SubSystem instance; 
+ * 
+ * public static SubSystem getInstance() {
+ * 		if (instance == null) {
+ * 			instance = new SubSystem();
+ * 		}
+ * 		return instance;
+ * }
  * 
  * @author Lucas
  */

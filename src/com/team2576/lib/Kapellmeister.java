@@ -22,7 +22,7 @@ public class Kapellmeister {
 	private SensorInput sensorData;
 	private Debugger debug;
 	
-	private Kapellmeister() {		
+	private Kapellmeister() {
 		this.virtuosen = new Vector<SubComponent>(ChiliConstants.kSubSystems);
 		driverData = DriverInput.getInstance();
 		sensorData = SensorInput.getInstance();
@@ -36,7 +36,7 @@ public class Kapellmeister {
 		return Konzertmeister;
 	}	
 	
-	public void conduct() {		
+	public void conduct() {	
 		for(int i = 0 ; i < this.virtuosen.size(); i++) {
 			((SubComponent) this.virtuosen.elementAt(i)).update(driverData, sensorData);
 			debug.println("Time", Timer.getFPGATimestamp());
