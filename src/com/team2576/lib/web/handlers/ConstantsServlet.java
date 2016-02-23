@@ -1,6 +1,7 @@
 package com.team2576.lib.web.handlers;
 
 import com.team2576.lib.web.handlers.Constants;
+import com.team2576.lib.util.ChiliConstants;
 import com.team2576.lib.util.ConstantsBase.Constant;
 
 import javax.servlet.ServletException;
@@ -14,7 +15,7 @@ import java.util.Collection;
 public class ConstantsServlet extends HttpServlet {
 
     private void buildPage(HttpServletResponse response) throws IOException {
-        Constants constants = new Constants();
+        ChiliConstants constants = new ChiliConstants();
 
         response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
