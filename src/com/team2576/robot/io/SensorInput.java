@@ -83,8 +83,7 @@ public class SensorInput {
 	 */
 	public double getBatteryVoltage() {
 		return this.pdp.getVoltage();
-	}	
-	
+	}		
 	
 	public boolean getHallA() {
 		return this.hallA.get();
