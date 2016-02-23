@@ -1,8 +1,8 @@
 package com.team2576.auto;
 
 import com.team2576.auto.modes.DoNothingAutoMode;
-import com.team254.frc2015.auto.modes.PeacockAutoMode;
-import com.team254.frc2015.auto.modes.ThreeToteAutoMode;
+import com.team2576.auto.modes.PeacockAutoMode;
+import com.team2576.auto.modes.ThreeToteAutoMode;
 import org.json.simple.JSONArray;
 
 import java.util.ArrayList;

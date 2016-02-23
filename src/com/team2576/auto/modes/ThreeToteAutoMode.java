@@ -1,8 +1,8 @@
 package com.team2576.auto.modes;
 
-import com.team254.frc2015.Constants;
-import com.team254.frc2015.auto.AutoMode;
-import com.team254.frc2015.auto.AutoModeEndedException;
+import com.team2576.lib.web.handlers.Constants;
+import com.team2576.auto.AutoMode;
+import com.team2576.auto.AutoModeEndedException;
 import com.team254.frc2015.subsystems.TopCarriage;
 import edu.wpi.first.wpilibj.Timer;
 

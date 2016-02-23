@@ -1,7 +1,7 @@
 package com.team2576.auto.modes;
 
-import com.team254.frc2015.auto.AutoMode;
-import com.team254.frc2015.auto.AutoModeEndedException;
+import com.team2576.auto.AutoMode;
+import com.team2576.auto.AutoModeEndedException;
 
 public class PeacockAutoMode extends AutoMode {
 

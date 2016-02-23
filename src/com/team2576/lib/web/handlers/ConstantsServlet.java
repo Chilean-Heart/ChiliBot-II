@@ -1,7 +1,7 @@
 package com.team2576.lib.web.handlers;
 
-import com.team254.frc2015.Constants;
-import com.team254.lib.util.ConstantsBase.Constant;
+import com.team2576.lib.web.handlers.Constants;
+import com.team2576.lib.util.ConstantsBase.Constant;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
