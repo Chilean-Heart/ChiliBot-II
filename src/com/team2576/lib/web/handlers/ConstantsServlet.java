@@ -19,9 +19,23 @@ public class ConstantsServlet extends HttpServlet {
         response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
         PrintWriter out = response.getWriter();
-
+        out.println("<head>");
+        out.println("<link rel='stylesheet' type='text/css' href='css/style.css'/>");
+        out.println("<script type='text/javascript' src='js/cambiarPestanna.js'></script>");
+        out.println("<script type='text/javascript' src='js/jquery-1.7.2.min.js'></script>");
+        out.println("</head>");
         out.println("<html>");
         out.println("<body>");
+        out.println("<div class='contenedor>'");
+        out.println("<div class='titulo'>ChileanHeart FRC2576</div>");
+        out.println("<div id='pestanas'>");
+        out.println("<ul id='lista'>");
+        out.println("<li id='pestana1'><a href='javascript:cambiarPestanna(pestanas,pestana1);'>Constantes</a></li>");
+        out.println("<li id='pestana2'><a href='javascript:cambiarPestanna(pestanas,pestana1);'Nvidia TX1</a></li>");
+        out.println("</div>");//Fin pestanas
+        out.println("<body onload='javascript:cambiarPestanna(pestanas,pestana1);'>");
+        out.println("<div id='contenidopestanas'>");
+        out.println("<div id='cpestana1'>");
         out.println("<form method='post'>");
         out.println("<table cellspacing='5'>");
         Collection<Constant> cs = constants.getConstants();
@@ -37,6 +51,10 @@ public class ConstantsServlet extends HttpServlet {
         out.println("<input type='submit' value='Save'>");
         out.println("<input type='reset' value='Reset'>");
         out.println("</form>");
+        out.println("</div>");
+        out.println("<div id='cpestana2'>");
+        //Lucas aqui va al wea de TX1
+        out.println("</div>");
         out.println("</body>");
         out.println("</html>");
     }
