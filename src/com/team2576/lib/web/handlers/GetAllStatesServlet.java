@@ -1,17 +1,21 @@
 package com.team2576.lib.web.handlers;
 
+import com.team254.lib.util.SystemManager;
+import org.json.simple.JSONObject;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class BaseServlet extends HttpServlet {
+public class GetAllStatesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
+        response.setContentType("application/json;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().println("<h1>Hello BaseServlet</h1><br><a href='/all_states'>States?</a>");
+        JSONObject json = SystemManager.getInstance().get();
+        response.getWriter().println(json.toJSONString());
     }
 }
