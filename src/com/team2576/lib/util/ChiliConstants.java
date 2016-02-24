@@ -1,5 +1,7 @@
 package com.team2576.lib.util;
 
+import com.team2576.lib.util.ConstantsBase;
+
 /**
  * The class ChiliConstants. Contains values used throughout the robot code. This avoids the existance of "magic numbers"
  * and allows for a quick modification of any value without having to search through all the different classes. 
@@ -20,7 +22,7 @@ package com.team2576.lib.util;
  * @author Lucas
  */
 
-public class ChiliConstants {
+public class ChiliConstants extends ConstantsBase{
 	
 	//---------------------------------------------//
 	//----------------IO CONSTANTS-----------------//
@@ -79,9 +81,14 @@ public class ChiliConstants {
 	public static final double kInchToCm = 2.54;
 	public static final double kVoltsPerInch = kMaxBotixSuppliedVoltage / 512;
 	public static final double kVoltsPerCm = kVoltsPerInch * kInchToCm;
+	@Override
+	public String getFileLocation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
-
+	
 	
 
 	

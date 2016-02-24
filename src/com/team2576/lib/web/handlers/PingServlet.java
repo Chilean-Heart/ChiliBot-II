@@ -6,12 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class BaseServlet extends HttpServlet {
-
+public class PingServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
+        response.setContentType("application/json;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().println("<h1>Hello BaseServlet</h1><br><a href='/all_states'>States?</a>");
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.getWriter().println("\"pong\"");
+
     }
+
 }

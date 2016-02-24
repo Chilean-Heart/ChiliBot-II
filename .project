@@ -15,4 +15,16 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>edu.wpi.first.wpilib.plugins.core.nature.FRCProjectNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/com/team2576/lib/web/handlers/cambiarPestana.js</name>
+			<type>1</type>
+			<location>C:/Users/Caito103/Desktop/cambiarPestana.js</location>
+		</link>
+		<link>
+			<name>src/com/team2576/lib/web/handlers/style.css</name>
+			<type>1</type>
+			<location>C:/Users/Caito103/Desktop/style.css</location>
+		</link>
+	</linkedResources>
 </projectDescription>
