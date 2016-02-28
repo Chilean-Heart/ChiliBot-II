@@ -1,17 +1,13 @@
 package com.team2576.robot.io;
 
-import com.team2576.lib.sensors.ADIS16448_IMU;
-import com.team2576.lib.sensors.ChiliIMU;
-import com.team2576.lib.sensors.MaxBotix;
+import java.util.HashMap;
 
-import edu.wpi.first.wpilibj.ADXL362;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.DigitalInput;
+import com.team2576.lib.sensors.ADIS16448_IMU;
+import com.team2576.lib.util.ChiliConstants;
+
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.Ultrasonic;
-import edu.wpi.first.wpilibj.interfaces.Accelerometer.Range;
 
 /**
  * The Class SensorInput. Similar to DriverInput, but instead in charge of overlooking all sensors on the robot.
@@ -34,24 +30,11 @@ public class SensorInput {
 	 */
 	private static SensorInput instance;
 	
-	//This is a comment
-
-	
-	
 	private final PowerDistributionPanel pdp;
 	
-	private final DigitalInput hallA;
+	private final Encoder cuiLeft, cuiRight;
 	
-	private final Encoder encoderA;
-	
-	private final MaxBotix ultraSonic;
-	
-	private final ADXRS450_Gyro adGyro;
-	private final ADXL362 adAccel;
 	private final ADIS16448_IMU adIMU;
-	
-	private final DigitalInput limitSwitch;
-
 	
 	/**
 	 * Generates a single, static instance of the SensorInput class to allow universal and unique access to all sensors
@@ -67,46 +50,69 @@ public class SensorInput {
 	
 	private SensorInput() {
 		pdp = new PowerDistributionPanel();
-		hallA = new DigitalInput(0);
-		encoderA = new Encoder(2, 3, false);
-		adAccel = new ADXL362(Range.k4G);
-		adGyro = new ADXRS450_Gyro();
 		adIMU = new ADIS16448_IMU();
-		ultraSonic = new MaxBotix(0);
-		limitSwitch = new DigitalInput(5);
+		cuiLeft = new Encoder(ChiliConstants.iLeftEncoderA, ChiliConstants.iLeftEncoderB, false, EncodingType.k4X);
+		cuiRight = new Encoder(ChiliConstants.iRightEncoderA, ChiliConstants.iRIghtEncoderB, false, EncodingType.k4X);
 	}
 	
-	/**
-	 * Gets the battery voltage.
-	 *
-	 * @return The battery voltage
-	 */
 	public double getBatteryVoltage() {
 		return this.pdp.getVoltage();
 	}		
 	
-	public boolean getHallA() {
-		return this.hallA.get();
+	public double getCurrentAtChannel(int channel) {
+		return this.pdp.getCurrent(channel);
 	}
 	
-	public double getEncoder() {
-		return this.encoderA.get();
+	public HashMap<String, Double> getDriveCurrents() {
+		
+		HashMap<String, Double> currents = new HashMap<String, Double>();
+		
+		currents.put(ChiliConstants.iLeftFrontMotor, this.getCurrentAtChannel(ChiliConstants.iLeftFrontPDPChannel));
+		currents.put(ChiliConstants.iLeftMidMotor, this.getCurrentAtChannel(ChiliConstants.iLeftMidPDPChannel));
+		currents.put(ChiliConstants.iLeftRearMotor, this.getCurrentAtChannel(ChiliConstants.iLeftRearPDPChannel));
+		
+		currents.put(ChiliConstants.iRightFrontMotor, this.getCurrentAtChannel(ChiliConstants.iRightFrontPDPChannel));
+		currents.put(ChiliConstants.iRightMidMotor, this.getCurrentAtChannel(ChiliConstants.iRightMidPDPChannel));
+		currents.put(ChiliConstants.iRightRearMotor, this.getCurrentAtChannel(ChiliConstants.iRightRearPDPChannel));
+		
+		return currents;
+		
 	}
 	
-	public double getCm() {
-		return this.ultraSonic.getCentimeters();
+	public void initEncoders() {
+		this.cuiLeft.setMaxPeriod(ChiliConstants.kEncoderMaxPeriod);
+		this.cuiRight.setMaxPeriod(ChiliConstants.kEncoderMaxPeriod);
+		
+		this.cuiLeft.setDistancePerPulse(ChiliConstants.kEncoderDistPerPulse);
+		this.cuiRight.setDistancePerPulse(ChiliConstants.kEncoderDistPerPulse);
+		
+		this.cuiLeft.reset();
+		this.cuiRight.reset();
 	}
 	
-	public double getIn() {
-		return this.ultraSonic.getInches();
+	public void resetEncoders() {
+		this.cuiLeft.reset();
+		this.cuiRight.reset();
 	}
 	
-	public double getSensorVoltage() {
-		return this.ultraSonic.getSensorVoltage();
+	public double getIMUAngle() {
+		return this.adIMU.getAngle();
 	}
 	
-	public boolean getLimitSwitch() {
-		return this.limitSwitch.get();
+	public double getLeftCount() {
+		return this.cuiLeft.get();
+	}
+	
+	public double getRightCount() {
+		return this.cuiRight.get();
+	}
+
+	public double getLeftSpeed() {
+		return this.cuiLeft.getRate();
+	}
+	
+	public double getRightSpeed() {
+		return this.cuiRight.getRate();
 	}
 	
 }

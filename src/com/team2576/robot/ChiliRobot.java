@@ -2,7 +2,6 @@ package com.team2576.robot;
 
 import com.team2576.lib.Kapellmeister;
 import com.team2576.lib.Logger;
-import com.team2576.lib.sensors.ChiliIMU;
 import com.team2576.lib.util.ChiliConstants;
 import com.team2576.robot.subsystems.ChiliIntake;
 import com.team2576.robot.subsystems.DummyDrive;

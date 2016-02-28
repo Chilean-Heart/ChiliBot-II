@@ -13,7 +13,7 @@ import com.team2576.robot.io.*;
 public class ChiliDrive implements SubComponent{
 	
 	private static ChiliDrive instance;
-	
+
 	@SuppressWarnings("unused")
 	private Debugger debug;
 	
@@ -75,6 +75,10 @@ public class ChiliDrive implements SubComponent{
 	 * </ul>
 	 */
 	public boolean update(DriverInput driver, SensorInput sensor) {
+		
+		
+		
+		
 		return false;
 	}
 
