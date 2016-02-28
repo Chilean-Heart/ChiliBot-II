@@ -48,6 +48,8 @@ public class DummyDrive implements SubComponent {
 		//SmartDashboard.putNumber("IMU Raw Angle", sensor.getRawAngleIMU());
 		//SmartDashboard.putNumber("IMU Raw Z Acceleration", sensor.getRawZIMU());
 		//SmartDashboard.putNumber("Maxbotix Sensor", sensor.getSensorVoltage());
+		
+		sensor.postImage();
 			
 		return false;
 	}

@@ -2,12 +2,18 @@ package com.team2576.robot.io;
 
 import java.util.HashMap;
 
+import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.IMAQdxCameraControlMode;
+import com.ni.vision.NIVision.Image;
+
 import com.team2576.lib.sensors.ADIS16448_IMU;
 import com.team2576.lib.util.ChiliConstants;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.vision.AxisCamera;
 
 /**
  * The Class SensorInput. Similar to DriverInput, but instead in charge of overlooking all sensors on the robot.
@@ -23,6 +29,12 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 public class SensorInput {
 	
+	enum Cameras {
+		LEFT_CAM,
+		MID_CAM,
+		RIGHT_CAM
+	}
+	
 	/** 
 	 * Unique instance of object.
 	 * 
@@ -34,7 +46,14 @@ public class SensorInput {
 	
 	private final Encoder cuiLeft, cuiRight;
 	
+	private final Encoder intakeAngle;
+	
 	private final ADIS16448_IMU adIMU;
+	
+	private AxisCamera camCenter;
+	private int camLeft, camRight;
+	private int currentSession;
+	private Cameras currentCam;
 	
 	/**
 	 * Generates a single, static instance of the SensorInput class to allow universal and unique access to all sensors
@@ -52,8 +71,72 @@ public class SensorInput {
 		pdp = new PowerDistributionPanel();
 		adIMU = new ADIS16448_IMU();
 		cuiLeft = new Encoder(ChiliConstants.iLeftEncoderA, ChiliConstants.iLeftEncoderB, false, EncodingType.k4X);
-		cuiRight = new Encoder(ChiliConstants.iRightEncoderA, ChiliConstants.iRIghtEncoderB, false, EncodingType.k4X);
+		cuiRight = new Encoder(ChiliConstants.iRightEncoderA, ChiliConstants.iRightEncoderB, false, EncodingType.k4X);
+		intakeAngle = new Encoder(ChiliConstants.iIntakeEncoderA, ChiliConstants.iIntakeEncoderB, false, EncodingType.k4X);
+		
+		camLeft = NIVision.IMAQdxOpenCamera(ChiliConstants.kCamLeft, IMAQdxCameraControlMode.CameraControlModeController);
+		camCenter = new AxisCamera(ChiliConstants.kCamCenter);
+		camRight = NIVision.IMAQdxOpenCamera(ChiliConstants.kCamRight, IMAQdxCameraControlMode.CameraControlModeController);
+		
+		currentSession = camLeft;
+		currentCam = Cameras.LEFT_CAM;
+		
+		NIVision.IMAQdxConfigureGrab(currentSession);
 	}
+	
+	
+	
+	
+	public double getIMUAngle() {
+		return this.adIMU.getAngle();
+	}
+	
+	
+	
+	
+	public void changeCamera(Cameras cam) {
+		
+		if (cam == Cameras.MID_CAM) {
+			currentCam = cam;
+			return;
+		}
+		
+		NIVision.IMAQdxStopAcquisition(currentSession);
+		currentCam = cam;
+		
+		if (cam == Cameras.LEFT_CAM) currentSession = camLeft;
+		else if (cam == Cameras.RIGHT_CAM) currentSession = camRight;
+		
+		NIVision.IMAQdxConfigureGrab(currentSession);
+		
+	}
+	
+	public Image getImage(Cameras cam) {
+		
+		if (cam != currentCam) this.changeCamera(cam);
+		
+		Image frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+		
+		if (cam == Cameras.MID_CAM) camCenter.getImage(frame);
+		else NIVision.IMAQdxGrab(currentSession, frame, 1);
+		
+		return frame;
+	}
+	
+	public Image getImage() {
+		return this.getImage(currentCam);
+	}
+	
+	public void postImage() {
+		CameraServer.getInstance().setImage(this.getImage());
+	}
+	
+	public void postImage(Cameras cam) {
+		CameraServer.getInstance().setImage(this.getImage(cam));
+	}
+	
+	
+	
 	
 	public double getBatteryVoltage() {
 		return this.pdp.getVoltage();
@@ -79,24 +162,28 @@ public class SensorInput {
 		
 	}
 	
+	
+	
+	
+	
 	public void initEncoders() {
 		this.cuiLeft.setMaxPeriod(ChiliConstants.kEncoderMaxPeriod);
 		this.cuiRight.setMaxPeriod(ChiliConstants.kEncoderMaxPeriod);
+		this.intakeAngle.setMaxPeriod(ChiliConstants.kEncoderMaxPeriod);
 		
 		this.cuiLeft.setDistancePerPulse(ChiliConstants.kEncoderDistPerPulse);
 		this.cuiRight.setDistancePerPulse(ChiliConstants.kEncoderDistPerPulse);
+		this.intakeAngle.setDistancePerPulse(ChiliConstants.kIntakeDegsPerPulse);
 		
 		this.cuiLeft.reset();
 		this.cuiRight.reset();
+		this.intakeAngle.reset();
 	}
 	
 	public void resetEncoders() {
 		this.cuiLeft.reset();
 		this.cuiRight.reset();
-	}
-	
-	public double getIMUAngle() {
-		return this.adIMU.getAngle();
+		this.intakeAngle.reset();
 	}
 	
 	public double getLeftCount() {

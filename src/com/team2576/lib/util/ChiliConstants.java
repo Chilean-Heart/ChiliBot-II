@@ -71,15 +71,24 @@ public class ChiliConstants {
 	public static final int iLeftEncoderA = 0;
 	public static final int iLeftEncoderB = 1;
 	public static final int iRightEncoderA = 2;
-	public static final int iRIghtEncoderB = 3;
+	public static final int iRightEncoderB = 3;
+	public static final int iIntakeEncoderA = 4;
+	public static final int iIntakeEncoderB = 5;
 	
 	public static final double kEncoderMaxPeriod = 0.3;
 	
 	private static final double kEncoderPulsesPerRev = 512;
 	private static final double kEncoderPulsesPerRevAtOutputStage = kEncoderPulsesPerRev * 3;
 	private static final double kWheelPerimeter = 2 * Math.PI * 4.1;
-	
 	public static final double kEncoderDistPerPulse = kWheelPerimeter / kEncoderPulsesPerRevAtOutputStage;
+	
+	private static final double kIntakePulsesPerRev = 71 * 7;
+	public static final double kIntakeDegsPerPulse = 360 / kIntakePulsesPerRev;
+
+	
+	public static final String kCamLeft = "cam0";
+	public static final String kCamRight = "cam1";
+	public static final String kCamCenter = "axis-00408cef43ee.local";
 	
 	//---------------------------------------------//
 	//---------------------------------------------//
