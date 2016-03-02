@@ -56,11 +56,12 @@ public class ChiliHTTPServer extends NanoHTTPD implements ChiliServers {
 		currentURI = session.getUri();
 		
 		// Get URL parameters from GET request
+		@SuppressWarnings("unused")
 		Map<String, List<String>> decodedQuerPar = decodeParameters(session.getQueryParameterString());
 		
 		// Print the URI and decodedQuerPar for debugging purposes
-		System.out.println(currentURI);
-		System.out.println(decodedQuerPar.toString());
+		//System.out.println(currentURI);
+		//System.out.println(decodedQuerPar.toString());
 		
 		/*
 		 * This section of code was an attempt to optimize lines and uses of streams.
@@ -160,7 +161,7 @@ public class ChiliHTTPServer extends NanoHTTPD implements ChiliServers {
 				
 				// URI requesting a index.html
 				else {
-					System.out.println("Delivering "+this.index+"!");					
+					//System.out.println("Delivering "+this.index+"!");					
 					mbuffer = getClass().getResourceAsStream(path+this.index);
 					return new NanoHTTPD.Response(HTTP_OK, MIME_HTML, mbuffer);
 

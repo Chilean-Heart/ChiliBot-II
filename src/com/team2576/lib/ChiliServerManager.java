@@ -7,11 +7,12 @@ import com.team2576.lib.util.ChiliConstants;
 public class ChiliServerManager {
 	
 	private Vector<ChiliServers> servers;
+	private Vector<Thread> serverThreads;
 	private static ChiliServerManager instance;
 	
 	private ChiliServerManager () {
 		this.servers = new Vector<ChiliServers>(ChiliConstants.kServers);
-		
+		this.serverThreads = new Vector<Thread>(ChiliConstants.kServers);
 	}
 	
 	public static ChiliServerManager getInstance() {
@@ -35,9 +36,12 @@ public class ChiliServerManager {
 					}
 				}
 			});
-			serverThread.setPriority(Thread.MIN_PRIORITY);
-			serverThread.setDaemon(true);
-		    serverThread.start();
+			
+			serverThreads.add(serverThread);
+			
+			serverThreads.lastElement().setPriority(Thread.MIN_PRIORITY);
+			serverThreads.lastElement().setDaemon(true);
+			serverThreads.lastElement().start();
 		}
 	}
 	

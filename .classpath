@@ -17,5 +17,10 @@
 	<classpathentry kind="lib" path="lib/websocket-common-9.2.6.v20141205.jar"/>
 	<classpathentry kind="lib" path="lib/websocket-server-9.2.6.v20141205.jar"/>
 	<classpathentry kind="lib" path="lib/websocket-servlet-9.2.6.v20141205.jar"/>
+	<classpathentry kind="lib" path="lib/opencv-300.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="ChiliBot-II/resources"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

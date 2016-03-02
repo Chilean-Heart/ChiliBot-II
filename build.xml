@@ -24,6 +24,8 @@
   <property file="${user.home}/wpilib/wpilib.properties"/>
   <property file="build.properties"/>
   <property file="${user.home}/wpilib/java/${version}/ant/build.properties"/>
+	
+  <!-- <property name="classpath" value="${opencv.jar}:${javacv.jar}" /> -->
   
   <import file="${wpilib.ant.dir}/build.xml"/>
 	
@@ -48,6 +50,7 @@
 
       <fileset dir="${build.dir}" includes="**/*.class"/>
       <fileset dir="${resources.dir}"/>
+      <!-- <fileset dir="${opencv.nativelib}"/> -->
 
     <zipgroupfileset dir="${build.jars}">
       <include name="**/*.jar" />
