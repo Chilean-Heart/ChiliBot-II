@@ -1,8 +1,12 @@
 package com.team2576.lib.util;
 
+import com.team2576.lib.sensors.ADIS16448_IMU;
+
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SensorBase;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Ultrasonic;
 
 /**
 *
@@ -20,31 +24,45 @@ public class ChiliPID2 {
 		
 		@Override
 		public void run() {
-			controller.calculate();
-			
-			try {
-				Thread.sleep(5);
-			} catch (Exception e) {
-				e.printStackTrace();
+			while (true) {
+				
+				try {
+					controller.calculate();
+				} catch (Exception ePID) {
+					ePID.printStackTrace();
+				}
+				
+				try {
+					Thread.sleep(5);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
 	
-	private ChiliPID controller;
+	public ChiliPID controller;
 	private SensorBase input;
 	private SpeedController output;
-	private double kP, kI, kD;
+	private double kP, kI, kD, e;
+	private int currentChannel;
+	private boolean isSpeedController;
 	
 	private Thread controlTaskThread;
 	
-	public ChiliPID2 (double Kp, double Ki, double Kd, double e, SensorBase source, SpeedController motor) {
+	public ChiliPID2 (double Kp, double Ki, double Kd, double e, SensorBase source, SpeedController motor, int motorCurrent) {
 		this.kP = Kp;
 		this.kI = Ki;
 		this.kD = Kd;
+		this.e = e;
+		
+		this.currentChannel = motorCurrent;
 		this.input = source;
 		this.output = motor;
 		
-		this.controller = new ChiliPID(this.kP, this.kI, this.kD);
+		this.isSpeedController = false;
+		
+		this.controller = new ChiliPID(this.kP, this.kI, this.kD, e);
 		
 		this.controlTaskThread = new Thread(new ControlTask(this));
 		this.controlTaskThread.setDaemon(true);
@@ -52,27 +70,55 @@ public class ChiliPID2 {
 		
 	}
 	
-	public ChiliPID2 (double Kp, double Ki, double Kd, SensorBase source, SpeedController motor) {
-		this(Kp, Ki, Kd, 0.0, source, motor);
+	public ChiliPID2 (double Kp, double Ki, double Kd, SensorBase source, SpeedController motor, int motorCurrent) {
+		this(Kp, Ki, Kd, 0.0, source, motor, motorCurrent);
 	}
 	
-	public ChiliPID2 (SensorBase source, SpeedController motor) {
-		this(0.0, 0.0, 0.0, 0.0, source, motor);
+	public ChiliPID2 (SensorBase source, SpeedController motor, int motorCurrent) {
+		this(0.0, 0.0, 0.0, 0.0, source, motor, motorCurrent);
 	}
 	
-	
-	
-	public void calculate() {
-		
-		double currentVal;
-		
-		if (this.input instanceof Encoder) {
-			currentVal = ((Encoder) input).get();
+	public void setSpeedControl(boolean enableSpeed) throws Exception {
+		if (input instanceof Encoder) {
+			this.isSpeedController = enableSpeed;
+		} else {
+			throw new Exception("Sensor type does not allow speed control");
 		}
-
-		
 	}
 	
 	
-
+	
+	public void calculate() throws Exception {
+		
+		double currentVal, outputVal;
+		
+		// Obtain current value
+		if (this.input instanceof Encoder) {
+			if (this.isSpeedController) {
+				currentVal = ((Encoder) this.input).getRate();
+			} else {
+				currentVal = ((Encoder) this.input).get();
+			}
+		} else if (this.input instanceof Ultrasonic) {
+			currentVal = ((Ultrasonic) this.input).pidGet();
+		} else if (this.input instanceof ADIS16448_IMU) {
+			currentVal = ((ADIS16448_IMU) this.input).getAngle();
+		} else if (this.input instanceof PowerDistributionPanel) {
+			currentVal = ((PowerDistributionPanel) this.input).getCurrent(this.currentChannel);
+		} else {
+			throw new Exception("Sensor is not of compatible type");
+		}
+		
+		// Calculate PID output
+		if (isSpeedController) {
+			outputVal = this.controller.calcPIDInc(currentVal);
+		} else {
+			outputVal = this.controller.calcPID(currentVal);
+		}
+		
+		// Set PID output
+		outputVal = ChiliFunctions.clamp_output(outputVal);		
+		this.output.set(outputVal);
+		
+	}
 }

@@ -115,7 +115,7 @@ public class ChiliConstants {
 	public static final int iShifterB = 1;
 	
 	//ChiliIntake.java-----------------------------//
-	public static final int intakeDeployerId = 27;
+	public static final int intakeDeployerId = 20;
 	public static final int iIntakeTube = 0;
 	
 	public static final double kIntakeBoulders = 1.0;
