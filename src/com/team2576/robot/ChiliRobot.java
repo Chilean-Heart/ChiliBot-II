@@ -2,14 +2,16 @@ package com.team2576.robot;
 
 import com.team2576.lib.Kapellmeister;
 import com.team2576.lib.Logger;
-import com.team2576.lib.util.ChiliConstants;
+import com.team2576.robot.subsystems.ChiliHanger;
 import com.team2576.robot.subsystems.ChiliIntake;
 import com.team2576.robot.subsystems.DummyDrive;
 
 import java.io.IOException;
 
 import com.team2576.lib.ChiliHTTPServer;
+import com.team2576.lib.ChiliInformer;
 import com.team2576.lib.ChiliServerManager;
+import com.team2576.lib.ChiliVision;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -39,8 +41,10 @@ public class ChiliRobot extends IterativeRobot {
 	 * Declaracion de subsistemas.
 	 */
 	DummyDrive drive; 
-	
+	ChiliVision vision;
 	ChiliIntake intake;
+	ChiliInformer informer;
+	ChiliHanger hanger;
 	
     /**
      * This function is run when the robot is first started up and should be
@@ -55,6 +59,9 @@ public class ChiliRobot extends IterativeRobot {
 		drive = DummyDrive.getInstance();
 		serverManager = ChiliServerManager.getInstance();
 		intake = ChiliIntake.getInstance();
+		hanger = ChiliHanger.getInstance();
+		vision = ChiliVision.getInstance();
+		informer = ChiliInformer.getInstance();
 		
 		try {
 			httpServer = new ChiliHTTPServer();
@@ -62,7 +69,9 @@ public class ChiliRobot extends IterativeRobot {
 			e.printStackTrace();
 		}
 		
-		kapellmeister.addTask(drive, ChiliConstants.iDummyDrive);
+		//kapellmeister.addTask(drive, ChiliConstants.iDummyDrive);
+		kapellmeister.addTask(intake);
+		kapellmeister.addTask(hanger);
 		serverManager.addServer(httpServer);
 		serverManager.initializeServers();
 		

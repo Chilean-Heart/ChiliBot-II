@@ -1,8 +1,10 @@
 package com.team2576.robot.io;
 
-import java.util.concurrent.ConcurrentHashMap;
-
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import com.team2576.lib.util.ChiliConstants;
+import com.team2576.lib.util.Informable;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
@@ -16,7 +18,7 @@ import edu.wpi.first.wpilibj.VictorSP;
  * @author Lucas
  */
 
-public class RobotOutput {
+public class RobotOutput implements Informable{
 	
 	
 	enum Shifter {
@@ -33,8 +35,7 @@ public class RobotOutput {
 	 */
 	private static RobotOutput instance;
 	
-	public ConcurrentHashMap<String, Double> outputValues;
-	
+	public Map<String, Double> outputValues;
 	
 	private final CANTalon leftFront, leftMid, leftRear;
 	private final CANTalon rightFront, rightMid, rightRear;
@@ -53,7 +54,7 @@ public class RobotOutput {
 		
 		//HashMap object containing output information
 		
-		outputValues = new ConcurrentHashMap<String, Double>();
+		outputValues = Collections.synchronizedMap(new LinkedHashMap<String, Double>());
 		
 		outputValues.put(ChiliConstants.iLeftFrontMotor, ChiliConstants.kZeroValue);
 		outputValues.put(ChiliConstants.iLeftMidMotor, ChiliConstants.kZeroValue);
@@ -98,7 +99,6 @@ public class RobotOutput {
 		rightArm = new Talon(ChiliConstants.iRightHanger);
 		
 		winch = new Talon(ChiliConstants.iWinchMotor);
-		
 	}
 	
 	
@@ -116,16 +116,10 @@ public class RobotOutput {
 		return instance;
 	}
 	
-	
-	
-	
 	public void compressorInit() {
 		this.compressor.start();
 		this.compressor.setClosedLoopControl(true);
 	}
-	
-	
-	
 	
 	private void setLeftFrontDrive(double n) {
 		outputValues.put(ChiliConstants.iLeftFrontMotor, n);
@@ -193,9 +187,6 @@ public class RobotOutput {
 		this.setChiliDrive(leftSpeed, rightSpeed, Shifter.PRESERVE);
 	}
 	
-	
-	
-	
 	private void setIntaker(double n) {
 		outputValues.put(ChiliConstants.iIntaker, n);
 		intakeTube.set(n);
@@ -218,8 +209,6 @@ public class RobotOutput {
 		this.setIntaker(ChiliConstants.kZeroValue);
 	}
 	
-	
-	
 	private void setLeftHanger(double n) {
 		outputValues.put(ChiliConstants.iLeftArm, n);
 		leftArm.set(n);
@@ -233,12 +222,16 @@ public class RobotOutput {
 	public void setHangerSpeed(double speed) {
 		this.setLeftHanger(speed);
 		this.setRightHanger(-1 *speed);
-		
 	}
 	
 	public void setWinchSpeed(double speed) {
 		this.outputValues.put(ChiliConstants.iWinch, speed);
 		this.winch.set(speed);
+	}
+
+	@Override
+	public Map<String, Double> inform() {
+		return this.outputValues;
 	}
 
 }

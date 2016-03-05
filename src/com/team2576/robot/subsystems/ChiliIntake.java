@@ -21,7 +21,7 @@ public class ChiliIntake implements SubComponent {
 
 	@Override
 	public boolean update(DriverInput driver, SensorInput sensor) {
-		// TODO Auto-generated method stub
+		// TODO Insertar codigo de control de intake
 		return false;
 	}
 

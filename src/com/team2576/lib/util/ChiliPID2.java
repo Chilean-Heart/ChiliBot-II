@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.Ultrasonic;
 
 public class ChiliPID2 {
 	
-	private static class ControlTask implements Runnable {
+	private class ControlTask implements Runnable {
 		private ChiliPID2 controller;
 		
 		public ControlTask(ChiliPID2 controller) {
@@ -33,7 +33,7 @@ public class ChiliPID2 {
 				}
 				
 				try {
-					Thread.sleep(5);
+					Thread.sleep(ChiliConstants.kPIDFrequency);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -46,11 +46,12 @@ public class ChiliPID2 {
 	private SpeedController output;
 	private double kP, kI, kD, e;
 	private int currentChannel;
-	private boolean isSpeedController;
+	private boolean isSpeedController, isStopped;
+	private double reference;
 	
 	private Thread controlTaskThread;
 	
-	public ChiliPID2 (double Kp, double Ki, double Kd, double e, SensorBase source, SpeedController motor, int motorCurrent) {
+	public ChiliPID2 (double Kp, double Ki, double Kd, double e, double ref, SensorBase source, SpeedController motor, int motorCurrent) {
 		this.kP = Kp;
 		this.kI = Ki;
 		this.kD = Kd;
@@ -61,8 +62,10 @@ public class ChiliPID2 {
 		this.output = motor;
 		
 		this.isSpeedController = false;
+		this.isStopped = false;
 		
-		this.controller = new ChiliPID(this.kP, this.kI, this.kD, e);
+		this.controller = new ChiliPID(this.kP, this.kI, this.kD, this.e);
+		this.controller.setReference(ref);
 		
 		this.controlTaskThread = new Thread(new ControlTask(this));
 		this.controlTaskThread.setDaemon(true);
@@ -71,11 +74,11 @@ public class ChiliPID2 {
 	}
 	
 	public ChiliPID2 (double Kp, double Ki, double Kd, SensorBase source, SpeedController motor, int motorCurrent) {
-		this(Kp, Ki, Kd, 0.0, source, motor, motorCurrent);
+		this(Kp, Ki, Kd, 0.0, 0.0, source, motor, motorCurrent);
 	}
 	
 	public ChiliPID2 (SensorBase source, SpeedController motor, int motorCurrent) {
-		this(0.0, 0.0, 0.0, 0.0, source, motor, motorCurrent);
+		this(0.0, 0.0, 0.0, 0.0, 0.0, source, motor, motorCurrent);
 	}
 	
 	public void setSpeedControl(boolean enableSpeed) throws Exception {
@@ -86,7 +89,22 @@ public class ChiliPID2 {
 		}
 	}
 	
+	public void stop() {
+		this.isStopped = true;
+	}
 	
+	public void start() {
+		this.isStopped = false;
+	}
+	
+	public void setReference(double ref) {
+		this.reference = ref;
+		this.controller.setReference(this.reference);
+	}
+	
+	public double getReference() {
+		return this.controller.getReference();
+	}
 	
 	public void calculate() throws Exception {
 		
@@ -117,7 +135,11 @@ public class ChiliPID2 {
 		}
 		
 		// Set PID output
-		outputVal = ChiliFunctions.clamp_output(outputVal);		
+		if (isStopped) {
+			outputVal = 0;
+		} else {
+			outputVal = ChiliFunctions.clamp_output(outputVal);
+		}
 		this.output.set(outputVal);
 		
 	}

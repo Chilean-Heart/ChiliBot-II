@@ -60,6 +60,24 @@ public class ChiliConstants {
 	public static final double kZeroValue = 0;
 	
 	//SensorInput.java-----------------------------//
+	public static final String iLeftEncoderCount = "LeftTicks";
+	public static final String iLeftEncoderSpeed = "LeftSpeed";
+	public static final String iLeftEncoderDistance = "LeftDist";
+	public static final String iRightEncoderCount = "RightTicks";
+	public static final String iRightEncoderSpeed = "RightSpeed";
+	public static final String iRightEncoderDistance = "RightDist";
+	
+	public static final String iLeftFrontMotorCurrent = "LeftFrontCurrent";
+	public static final String iLeftMidMotorCurrent = "LeftMidCurrent";
+	public static final String iLeftRearMotorCurrent = "LeftRearCurrent";
+	public static final String iRightFrontMotorCurrent = "RightFrontCurrent";
+	public static final String iRightMidMotorCurrent = "RightMidCurrent";
+	public static final String iRightRearMotorCurrent = "RightRearCurrent";
+	
+	public static final String iIMUAngle = "IMUAngle";
+	public static final String iBatteryVoltage = "BatteryVoltage";
+	public static final String iTotalCurrent = "TotalCurrent";
+	
 	public static final int iLeftFrontPDPChannel = 0;
 	public static final int iLeftMidPDPChannel = 1;
 	public static final int iLeftRearPDPChannel = 2;
@@ -75,17 +93,15 @@ public class ChiliConstants {
 	public static final int iIntakeEncoderA = 4;
 	public static final int iIntakeEncoderB = 5;
 	
-	public static final double kEncoderMaxPeriod = 0.3;
-	
 	private static final double kEncoderPulsesPerRev = 512;
 	private static final double kEncoderPulsesPerRevAtOutputStage = kEncoderPulsesPerRev * 3;
 	private static final double kWheelPerimeter = 2 * Math.PI * 4.1;
-	public static final double kEncoderDistPerPulse = kWheelPerimeter / kEncoderPulsesPerRevAtOutputStage;
-	
 	private static final double kIntakePulsesPerRev = 71 * 7;
+	
+	public static final double kEncoderMaxPeriod = 0.3;
+	public static final double kEncoderDistPerPulse = kWheelPerimeter / kEncoderPulsesPerRevAtOutputStage;
 	public static final double kIntakeDegsPerPulse = 360 / kIntakePulsesPerRev;
 
-	
 	public static final String kCamLeft = "cam0";
 	public static final String kCamRight = "cam1";
 	public static final String kCamCenter = "axis-00408cef43ee.local";
@@ -100,8 +116,10 @@ public class ChiliConstants {
 	//---------------------------------------------//
 	
 	//Kapellmeister.java---------------------------//
-	public static final byte kSubSystems = 1;
+	public static final byte kSubSystems = 3;
 	public static final byte iDummyDrive = 0;
+	public static final byte iChiliIntake = 1;
+	public static final byte iChiliHanger = 2;
 	
 	//ChiliDrive.java------------------------------//
 	public static final int leftFrontId = 21;
@@ -142,6 +160,15 @@ public class ChiliConstants {
 	public static final double kInchToCm = 2.54;
 	public static final double kVoltsPerInch = kMaxBotixSuppliedVoltage / 512;
 	public static final double kVoltsPerCm = kVoltsPerInch * kInchToCm;
+	
+	//ChiliPID2.java-------------------------------//
+	public static final int kPIDFrequency = 20;
+
+	public static final String iDateTimeStamp = "DateTime";
+
+	public static final boolean kCustomVisionDashboard = false;
+
+	public static final boolean kPDPConnected = false;
 	
 	
 	

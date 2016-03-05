@@ -11,9 +11,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.Map;
 
-import com.team2576.robot.io.RobotOutput;
-import com.team2576.robot.io.SensorInput;
 
 import edu.wpi.first.wpilibj.DriverStation;
 
@@ -26,16 +26,12 @@ public class Logger {
 	private SimpleDateFormat time_format;
 	private BufferedWriter writer;
 	private int index;
-	
+
 	private DriverStation driver;
-	@SuppressWarnings("unused")
-	private RobotOutput output;
-	@SuppressWarnings("unused")
-	private SensorInput sensor;
 	
 	private static Logger instance;
 		
-	private String loggables = "time,batteryVoltage";
+	private String loggables = "time";
 	
 	public static Logger getInstance() {
 		if (instance == null) {
@@ -47,10 +43,8 @@ public class Logger {
 	private Logger() {
 		
 		this.driver = DriverStation.getInstance();
-		this.output = RobotOutput.getInstance();
-		this.sensor = SensorInput.getInstance();
 		this.logger_time = new Date();
-		this.time_format = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss:SSS");
+		this.time_format = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss:SSSS");
 		
 		
 		File dir = new File(this.directory);
@@ -80,9 +74,14 @@ public class Logger {
 		boolean successful;
 		try {
 			//TODO get all buttons values in a array within DriverInput and print to writer with Arrays.toString(array);
+			Map<String, Double> data = ChiliInformer.getInstance().getData();
+			
 			this.writer.write(String.format("%s", this.generateTimeStamp(this.logger_time) ));
-			//this.writer.write(String.format(",%.2f", this.sensor.getBatteryVoltage() ));
-			this.writer.write(String.format(", %.2f", 0.0));
+			
+			for (Map.Entry<String, Double> entry : data.entrySet()) {
+				this.writer.write(String.format(", %.4f", entry.getValue()));
+			}			
+			this.writer.write(String.format(", %s", "\n"));
 			this.writer.newLine();
 			successful = true;
 		} catch (IOException | NullPointerException err) {
@@ -96,6 +95,14 @@ public class Logger {
 		try {
 			this.file_path = this.generatePath();
 			this.writer = new BufferedWriter(new FileWriter(this.file_path));
+			
+			Iterator<String> keys = ChiliInformer.getInstance().getData().keySet().iterator();
+			
+			while (keys.hasNext()) {
+				loggables +=",";
+				loggables += keys.next();
+			}
+			
 			this.writer.write(this.loggables);
 			this.writer.newLine();
 		} catch (IOException err) {

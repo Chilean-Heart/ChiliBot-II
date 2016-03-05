@@ -2,13 +2,17 @@
 <html lang="en">
 
 <head>
-
+	<script src="scripts/amcharts/amcharts.js" type="text/javascript"></script>
+	<script src="scripts/amcharts/serial.js" type="text/javascript"></script>
+	<script type="text/javascript" data-main="scripts/main" src="scripts/require.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
+	
+	
     <title>CDCH DashBoard</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/3-col-portfolio.css" rel="stylesheet">
@@ -19,13 +23,79 @@
 
 <body>
 
+<script type="text/javascript">
+		//datos graph2
+		
+		var chartData2 = [{
+		"country": "USA",
+		"visits": 4252
+	}, {
+		"country": "China",
+		"visits": 1882
+	}, {
+		"country": "Japan",
+		"visits": 1809
+	}, {
+		"country": "Germany",
+		"visits": 1322
+	}, {
+		"country": "UK",
+		"visits": 1122
+	}, {
+		"country": "France",
+		"visits": 1114
+	}, {
+		"country": "India",
+		"visits": 984
+	}, {
+		"country": "Spain",
+		"visits": 711
+	}, {
+		"country": "Netherlands",
+		"visits": 665
+	}, {
+		"country": "Russia",
+		"visits": 580
+	}, {
+		"country": "South Korea",
+		"visits": 443
+	}, {
+		"country": "Canada",
+		"visits": 441
+	}, {
+		"country": "Brazil",
+		"visits": 395
+	}, {
+		"country": "Italy",
+		"visits": 386
+	}];
+
+
+	// generate some random data, quite different range
+function generateChartData() {
+    for (day = 0; day < 0; day++) {
+        var newDate = new Date(firstDate);
+        newDate.setDate(newDate.getDate() + day);
+
+        var visits = Math.round(Math.random() * 40) - 20;
+
+        chartData.push({
+            date: newDate,
+            visits: visits
+        });
+    }
+}
+
+</script>
+
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand raw " href=""><img class="img-responsive img-center center-block img3" src="imgs/logo.png"></a>
-                <br><br/>                
-                <a class="navbar-brand" href="#"></a> 
 
+                <a class="navbar-brand" href="#"></a>
+                <a class="navbar-brand raw" href=""><img src="imgs/logo.png"></a>
+                <br><br/>
+                <br><br/>
             </div>
 
         </div>
@@ -33,9 +103,9 @@
 
     <div class="container">
                  <br><br/>
+                 <br><br/>
         <div class="row">
             <div class="col-lg-12">
-                <br><br/>
                 <h1 class="page-header">Consola
                     <small></small>
                 </h1>
@@ -48,22 +118,6 @@
                     <div class="tile animated fadeInUp">
 				 <p>
 <ul class='scrolling_list'>
-   <a>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</li>
-   <li>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</a>
-   <li>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</li>
-   <li>Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</li>
-   <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</li>
-   <li>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</li>
-   <li>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</li>
-   <li>Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</li>
-<li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</li>
-   <li>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</li>
-   <li>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</li>
-   <li>Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</li>
-   <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</li>
-   <li>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</li>
-   <li>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</li>
-   <li>Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</li>
    <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</li>
    <li>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</li>
    <li>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</li>
@@ -80,7 +134,23 @@
    <li>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</li>
    <li>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</li>
    <li>Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</li>
-</ul>	
+   <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</li>
+   <li>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</li>
+   <li>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</li>
+   <li>Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</li>
+   <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</li>
+   <li>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</li>
+   <li>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</li>
+   <li>Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</li>
+<li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</li>
+   <li>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</li>
+   <li>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</li>
+   <li>Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</li>
+   <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</li>
+   <li>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</li>
+   <li>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</li>
+   <li>Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</li>
+</ul>
 
                  </p>
 				</div>
@@ -91,32 +161,137 @@
              <div class="col-md-4 portfolio-item">
                 <a href="#">
                     <div class="tile animated fadeInUp">
-				<p>
-                 <br><br/>
-                 <br><br/>
-                 <br><br/>
-                 <br><br/>
-                 <br><br/>
-                 <br><br/>
-                 <br><br/>
-                </p>
+					<body>
+					<div id="chartdiv" style="width: 360px; height: 280px;"></div>
+					<script type="text/javascript">
+					
+					var chart;
+					var chartData = [];
+					var chartCursor;
+					var day = 0;
+					var firstDate = new Date();
+					firstDate.setDate(firstDate.getDate() - 500);
+
+					
+					generateChartData();
+					
+					AmCharts.ready(function() {
+    // generate some data first
+    generateChartData();
+
+    // SERIAL CHART    
+    chart = new AmCharts.AmSerialChart();
+    chart.pathToImages = "scripts/amcharts/images/";
+    chart.marginTop = 0;
+    chart.marginRight = 10;
+    chart.autoMarginOffset = 5;
+    chart.zoomOutButton = {
+        backgroundColor: '#000000',
+        backgroundAlpha: 0.15
+    };
+    chart.dataProvider = chartData;
+    chart.categoryField = "date";
+
+    // AXES
+    // category
+    var categoryAxis = chart.categoryAxis;
+    categoryAxis.parseDates = true; // as our data is date-based, we set parseDates to true
+    categoryAxis.minPeriod = "DD"; // our data is daily, so we set minPeriod to DD
+    categoryAxis.dashLength = 1;
+    categoryAxis.gridAlpha = 0.15;
+    categoryAxis.axisColor = "#DADADA";
+
+    // value                
+    var valueAxis = new AmCharts.ValueAxis();
+    valueAxis.axisAlpha = 0.2;
+    valueAxis.dashLength = 1;
+    chart.addValueAxis(valueAxis);
+
+    // GRAPH
+    var graph = new AmCharts.AmGraph();
+    graph.title = "red line";
+    graph.valueField = "visits";
+    graph.bullet = "round";
+    graph.bulletBorderColor = "#0101DF";
+    graph.bulletBorderThickness = 2;
+    graph.lineThickness = 2;
+    graph.lineColor = "#b5030d";
+    graph.negativeLineColor = "#0352b5";
+    graph.hideBulletsCount = 50; // this makes the chart to hide bullets when there are more than 50 series in selection
+    chart.addGraph(graph);
+
+    // CURSOR
+    chartCursor = new AmCharts.ChartCursor();
+    chartCursor.cursorPosition = "mouse";
+    chart.addChartCursor(chartCursor);
+
+    // SCROLLBAR
+    var chartScrollbar = new AmCharts.ChartScrollbar();
+    chartScrollbar.graph = graph;
+    chartScrollbar.scrollbarHeight = 40;
+    chartScrollbar.color = "#FFFFFF";
+    chartScrollbar.autoGridCount = true;
+    chart.addChartScrollbar(chartScrollbar);
+
+    // WRITE
+    chart.write("chartdiv");
+    
+    // set up the chart to update every second
+    setInterval(function () {
+        // normally you would load new datapoints here,
+        // but we will just generate some random values
+        // and remove the value from the beginning so that
+        // we get nice sliding graph feeling
+        
+        // remove datapoint from the beginning
+        chart.dataProvider.shift();
+        
+        // add new one at the end
+        day++;
+        var newDate = new Date(firstDate);
+        newDate.setDate(newDate.getDate() + day);
+        var visits = Math.round(Math.random() * 40) - 20;
+        chart.dataProvider.push({
+            date: newDate,
+            visits: visits
+        });
+        chart.validateData();
+    }, 1000);
+});
+
+
+					
+					</script>
+					
+					</body>
 				 </div>
                 </a>
 
              </div>
-                
+
              <div class="col-md-4 portfolio-item">
                 <a href="#">
                     <div class="tile animated fadeInUp">
-				<p>
-                 <br><br/>
-                 <br><br/>
-                 <br><br/>
-                 <br><br/>
-                 <br><br/>
-                 <br><br/>
-                 <br><br/>
-                </p>
+					<body>
+					<div id="chartdiv2" style="width: 360px; height: 280px;"></div>
+					<script type="text/javascript">
+					AmCharts.ready(function() {
+					var chart = new AmCharts.AmSerialChart();
+					chart.dataProvider = chartData2;
+					chart.categoryField = "country";
+					
+					var graph = new AmCharts.AmGraph();
+					graph.valueField = "visits";
+					graph.type = "column";
+					graph.fillAlphas = 0.5;
+					chart.angle = 30;
+					chart.depth3D = 15;
+					chart.addGraph(graph);
+					
+					chart.write('chartdiv2');
+					});
+					</script>
+					</body>
 				 </div>
 				 </a>
              </div>
@@ -156,153 +331,8 @@
          <footer>
             <div class="row">
                 <div class="col-lg-12">
-                	<div class="data">
-                		<h3>Wiring Connections</h3>
-                		<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Item</th>
-            <th>Controlador</th>
-            <th>Sensor</th>
-            <th>Puerto A</th>
-            <th>Puerto B</th>
-            <th>ID</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Motor Izquierdo 1</td>
-            <td>Talon SRX</td>
-            <td>PDP 0</td>
-            <td>CAN</td>
-            <td>-</td>
-            <td>21</td>
-        </tr>
-        <tr>
-            <td>Motor Izquierdo 2</td>
-            <td>Talon SRX</td>
-            <td>PDP 1</td>
-            <td>CAN</td>
-            <td>-</td>
-            <td>22</td>
-        </tr>
-        <tr>
-            <td>Motor Izquierdo 3</td>
-            <td>Talon SRX</td>
-            <td>PDP 2</td>
-            <td>CAN</td>
-            <td>-</td>
-            <td>23</td>
-        </tr>
-        <tr>
-            <td>Motor Derecho 1</td>
-            <td>Talon SRX</td>
-            <td>PDP 3</td>
-            <td>CAN</td>
-            <td>-</td>
-            <td>24</td>
-        </tr>
-        <tr>
-            <td>Motor Derecho 2</td>
-            <td>Talon SRX</td>
-            <td>PDP 4</td>
-            <td>CAN</td>
-            <td>-</td>
-            <td>25</td>
-        </tr>
-        <tr>
-            <td>Motor Derecho 3</td>
-            <td>Talon SRX</td>
-            <td>PDP 5</td>
-            <td>CAN</td>
-            <td>-</td>
-            <td>26</td>
-        </tr>
-        <tr>
-            <td>Shifter</td>
-            <td>Solenoid Doble 24V</td>
-            <td>-</td>
-            <td>PCM Port 0</td>
-            <td>PCM Port 1</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td>Brazo Intake</td>
-            <td>Talon SRX</td>
-            <td>-</td>
-            <td>CAN</td>
-            <td>-</td>
-            <td>20</td>
-        </tr>
-        <tr>
-            <td>Tubo Intake</td>
-            <td>Victor SP</td>
-            <td>-</td>
-            <td>PWM 0</td>
-            <td>-</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td>Hanger Brazo Izquierdo</td>
-            <td>Talon</td>
-            <td>-</td>
-            <td>PWM1</td>
-            <td>-</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td>Hanger Brazo Derecho</td>
-            <td>Talon</td>
-            <td>-</td>
-            <td>PWM2</td>
-            <td>-</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td>Hanger Winch</td>
-            <td>Talon</td>
-            <td>-</td>
-            <td>PWM3</td>
-            <td>-</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td>Encoder Chasis Izquierdo</td>
-            <td>-</td>
-            <td>CUI Encoder with 512 ticks</td>
-            <td>DIO 0</td>
-            <td>DIO 1</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td>Encoder Chasis Derecho</td>
-            <td>-</td>
-            <td>CUI Encoder with 512 ticks</td>
-            <td>DIO 2</td>
-            <td>DIO 3</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td>Encoder Angulo Intake</td>
-            <td>-</td>
-            <td>PG71 Encoder with 497 ticks</td>
-            <td>DIO 4</td>
-            <td>DIO 5</td>
-            <td>-</td>
-        </tr>
-    </tbody>
-</table>
-                	</div>
-                	
-                	<!--
-                	<div>
-	                	<img src="imgs/nur1.jpg" style="width:350px;height:700px;">
-	                	<img src="imgs/nur2.jpg" style="width:350px;height:700px;">
-	                	<img src="imgs/nur3.jpg" style="width:350px;height:700px;">
-                	</div>
-                	-->
                         <hr>
-                    <p> &copy; Corazon de Chileno 2016</p>
+                    <p> &copy; Corazon de Chileno 2015  -  By:Chico Arduino</p>
                 </div>
             </div>
 
@@ -310,7 +340,7 @@
         </div>
 
     </div>
- 
+
     <script src="js/jquery.js"></script>
 
     <script src="js/bootstrap.min.js"></script>

@@ -49,7 +49,7 @@ public class Kapellmeister {
 		}		
 	}	
 
-	public void addTask(SubComponent component, byte index) {
-		this.virtuosen.add(index, component);		
+	public void addTask(SubComponent component) {
+		this.virtuosen.add(component);		
 	}
 }

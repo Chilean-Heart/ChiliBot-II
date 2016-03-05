@@ -16,6 +16,7 @@ public class ChiliPID {
 	private double max_out; //Salida Maxima
 	private boolean flag_first_cycle; //Bandera para inicializar
 	private int cycle_count, min_cycle_count; //Conteo para el Deadband
+	private double velOutput;
 
 	//Constructor Vacio
 	public ChiliPID() {
@@ -32,6 +33,7 @@ public class ChiliPID {
 		this.reference = 0.0;
 		this.flag_first_cycle = true;
 		this.max_out = 0.0;
+		this.velOutput = 0.0;
 		
 		this.cycle_count = 0;
 		this.min_cycle_count = 5;
@@ -122,6 +124,38 @@ public class ChiliPID {
 		
 	}
 	
+	/*
+	public double calcPIDVel (double currentValue) {
+		
+		double kErr = 0.0;
+		double dErr = 0.0;
+		double iErr = 0.0;
+		
+		if(this.flag_first_cycle){
+			this.prev_val=currentValue;
+			this.flag_first_cycle=false;
+		}
+		
+		double error = this.reference - currentValue;
+		
+		//Calculo P
+		kErr = this.kP * ();
+		
+		//Calculo I
+		
+		
+		//Calculo D
+		
+		
+		double output = this.prev_val + kErr + dErr + iErr;
+		
+		output = ChiliFunctions.clamp_output(output);
+		
+		this.prev_val = currentValue;
+		
+		return output;
+	}*/
+	
 	public double calcPIDInc(double currentValue){
 		
 		double kErr = 0.0;
@@ -146,16 +180,17 @@ public class ChiliPID {
 		dErr = this.kD * DDelta;
 		
 		//Calculo General
-		double output =kErr + dErr + iErr;
+		this.velOutput += kErr + dErr + iErr;
 	
 		//Satura
-		output = ChiliFunctions.clamp_output(output,this.max_out);
+		this.velOutput = ChiliFunctions.clamp_output(this.velOutput, this.max_out);
 		
 		//Guarda Valor actual
 		this.prev_val = currentValue;
+		this.prev_D = Delta;
 			
 		//Devuelve
-		return output;
+		return this.velOutput;
 		
 	}
 	
