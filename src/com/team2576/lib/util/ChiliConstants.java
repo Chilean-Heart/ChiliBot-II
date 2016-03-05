@@ -102,8 +102,8 @@ public class ChiliConstants {
 	public static final double kEncoderDistPerPulse = kWheelPerimeter / kEncoderPulsesPerRevAtOutputStage;
 	public static final double kIntakeDegsPerPulse = 360 / kIntakePulsesPerRev;
 
-	public static final String kCamLeft = "cam0";
-	public static final String kCamRight = "cam1";
+	public static final String kCamLeft = "cam1";
+	public static final String kCamRight = "cam0";
 	public static final String kCamCenter = "axis-00408cef43ee.local";
 	
 	//---------------------------------------------//

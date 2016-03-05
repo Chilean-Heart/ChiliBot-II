@@ -52,7 +52,9 @@ public class SensorInput implements Informable {
 	
 	private final ADIS16448_IMU adIMU;
 	
+	@SuppressWarnings("unused")
 	private AxisCamera camCenter;
+	@SuppressWarnings("unused")
 	private USBCamera camLeft, camRight;
 	
 	public Map<String, Double> inputValues;
@@ -83,7 +85,7 @@ public class SensorInput implements Informable {
 		
 		camLeft = new USBCamera(ChiliConstants.kCamLeft);
 		camCenter = new AxisCamera(ChiliConstants.kCamCenter);
-		camRight = new USBCamera(ChiliConstants.kCamRight);
+		//camRight = new USBCamera(ChiliConstants.kCamRight);
 		
 		camLeft.openCamera();
 		//camRight.openCamera();
@@ -107,8 +109,8 @@ public class SensorInput implements Informable {
 		}
 		
 		images[0] = this.getImage(Cameras.LEFT_CAM);
-		images[1] = this.getImage(Cameras.MID_CAM);
-		images[2] = this.getImage(Cameras.RIGHT_CAM);
+		//images[1] = this.getImage(Cameras.MID_CAM);
+		//images[2] = this.getImage(Cameras.RIGHT_CAM);
 		
 		return images;
 	}
@@ -123,21 +125,16 @@ public class SensorInput implements Informable {
 		
 		try {
 			if (cam == Cameras.LEFT_CAM) {
-				//this.camLeft.startCapture();
 				this.camLeft.getImage(image);
 			} else if (cam == Cameras.MID_CAM) {
-				this.camCenter.getImage(image);
+				//this.camCenter.getImage(image);
 			} else if (cam == Cameras.RIGHT_CAM) {
-				//this.camRight.startCapture();
-				this.camRight.getImage(image);
+				//this.camRight.getImage(image);
 			}
 		} catch (VisionException ve) {
 			ve.printStackTrace();
 			abort_vision = true;
 		}
-		
-		//this.camLeft.stopCapture();
-		//this.camRight.stopCapture();
 		
 		return image;
 	}

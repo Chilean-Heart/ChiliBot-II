@@ -9,6 +9,7 @@ import com.team2576.robot.io.SensorInput.Cameras;
 
 import edu.wpi.first.wpilibj.CameraServer;
 
+@SuppressWarnings("unused")
 public class ChiliVision {
 	
 	private class VisionTask extends TimerTask {
@@ -54,6 +55,7 @@ public class ChiliVision {
 				}
 				
 				this.visionLoop.schedule(new VisionTask(this), (long) (this.delay), (long) (this.period));
+				sensor.abort_vision = false;
 			}
 			
 			this.frame = sensor.getImage(cam);
@@ -97,30 +99,29 @@ public class ChiliVision {
 	
 	private ChiliVision() {
 		camLeft = new VisionCamera(Cameras.LEFT_CAM, 0, 66);
-		camMid = new VisionCamera(Cameras.MID_CAM, 0, 33);
-		camRight = new VisionCamera(Cameras.RIGHT_CAM, 15, 66);
+		//camMid = new VisionCamera(Cameras.MID_CAM, 0, 33);
+		//camRight = new VisionCamera(Cameras.RIGHT_CAM, 15, 66);
 		
 		this.visiontask = new java.util.Timer();
 		this.visiontask.schedule(new ChiliVisionTask(this), 0L, (long) 10);
 		
 	}
 	
-	@SuppressWarnings("unused")
 	public synchronized void serve() {
 		while (true) {
 			
 			Image l, m, r;
 			
 			l = camLeft.isReady() ? camLeft.get() : null;
-			m = camMid.isReady() && ChiliConstants.kCustomVisionDashboard ? camMid.get() : null;
-			r = camRight.isReady() && ChiliConstants.kCustomVisionDashboard ? camRight.get() : null;
+			//m = camMid.isReady() && ChiliConstants.kCustomVisionDashboard ? camMid.get() : null;
+			//r = camRight.isReady() && ChiliConstants.kCustomVisionDashboard ? camRight.get() : null;
 			
 			try {
 				if (l != null) {
 					CameraServer.getInstance().setImage(l);
 					Thread.sleep(5);
 				}
-				
+				/*
 				if (m != null) {
 					CameraServer.getInstance().setImage(m);
 					Thread.sleep(5);
@@ -129,7 +130,7 @@ public class ChiliVision {
 				if (r != null) {
 					CameraServer.getInstance().setImage(r);
 					Thread.sleep(5);
-				}
+				}*/
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
